@@ -1,23 +1,56 @@
 {% extends 'base.html' %}
 {% block head %}
-  <title>Africa Innovation Technology  | About</title>
+  <title>Africa Innovation Technology | About</title>
 {% endblock %}
 
 {% block content %}
   <main class="container page-content">
-    <section class="section">
-      <h1>About AIT</h1>
-      <p>AIT is dedicated to accelerating African innovation through education, community, and affordable technology access.</p>
+    <section class="section about-hero">
+      <span class="eyebrow">About AIT</span>
+      <h1>We empower African builders with practical skills, strong networks, and startup-ready learning.</h1>
+      <p>At Africa Innovation Technology, we create a learning ecosystem for founders, developers, and innovators who want to build products, launch companies, and solve real problems across the continent.</p>
+      <div class="about-stats">
+        <div>
+          <strong>Practical</strong>
+          <p>Hands-on learning designed for real product work.</p>
+        </div>
+        <div>
+          <strong>Community</strong>
+          <p>Peer support, mentorship, and collaboration across Africa.</p>
+        </div>
+        <div>
+          <strong>Impact</strong>
+          <p>Courses and resources with an African innovation focus.</p>
+        </div>
+      </div>
     </section>
 
-    <section class="section split-grid">
-      <div>
+    <section class="section split-grid about-grid">
+      <div class="about-card">
         <h2>Our Mission</h2>
-        <p>Empower creators across Africa with real skills, strong networks, and the confidence to build technology that matters.</p>
+        <p>Empower creators across Africa with practical skills, flexible learning, and the confidence to launch technology that matters.</p>
       </div>
-      <div>
+      <div class="about-card">
         <h2>Our Vision</h2>
-        <p>To be the leading platform for African founders, developers, and learners who want to shape the future of tech on the continent.</p>
+        <p>To be the leading platform for African founders, learners, and innovators who want to shape the future of tech on the continent.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What we believe in</h2>
+      <div class="about-beliefs">
+        <article class="belief-card">
+          <h3>Learning by doing</h3>
+          <p>Skills grow faster when learners create actual projects, not just watch videos.</p>
+        </article>
+        <article class="belief-card">
+          <h3>Community first</h3>
+          <p>People learn better when they share feedback, support one another, and stay motivated together.</p>
+        </article>
+        <article class="belief-card">
+          <h3>Local relevance</h3>
+          <p>Our content is built for African contexts, markets, and founder journeys.</p>
+        </article>
       </div>
     </section>
 
@@ -28,7 +61,34 @@
         <li>Inclusive community</li>
         <li>Practical learning</li>
         <li>Local impact</li>
+        <li>Founder-first mindset</li>
+        <li>Accessible growth</li>
       </ul>
+    </section>
+
+    <section class="team container">
+      <div class="section-header">
+        <span class="eyebrow">Leadership</span>
+        <h2>Meet the team guiding AIT</h2>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <h3>Founder 1</h3>
+          <p>Driving product strategy, partnerships, and long-term vision.</p>
+        </article>
+        <article class="team-card">
+          <h3>Founder 2</h3>
+          <p>Leading curriculum design and mentoring learner success.</p>
+        </article>
+        <article class="team-card">
+          <h3>Founder 3</h3>
+          <p>Overseeing platform experience, technology, and operations.</p>
+        </article>
+        <article class="team-card">
+          <h3>Founder 4</h3>
+          <p>Scaling community growth, partnerships, and impact across markets.</p>
+        </article>
+      </div>
     </section>
   </main>
 {% endblock %}

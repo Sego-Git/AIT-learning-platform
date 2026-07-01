@@ -438,6 +438,82 @@ img {
   padding: 3rem 0;
 }
 
+.about-hero {
+  padding: 4rem 0 3rem;
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(15, 23, 42, 0.04));
+  border-radius: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-hero .eyebrow {
+  margin-bottom: 1rem;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  line-height: 1.05;
+  max-width: 760px;
+}
+
+.about-hero p {
+  max-width: 700px;
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.about-stats {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 2rem;
+}
+
+.about-stats div {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
+.about-stats strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+
+.about-grid {
+  margin-bottom: 3rem;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05);
+}
+
+.about-beliefs {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 2rem;
+}
+
+.belief-card {
+  background: var(--surface);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05);
+  min-height: 180px;
+}
+
+.belief-card h3 {
+  margin-top: 0;
+}
+
 .course-grid,
 .pricing-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
