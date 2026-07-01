@@ -185,4 +185,37 @@
       </article>
     </div>
   </section>
+
+{% block extra_scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.querySelector('.testimonial-carousel');
+      if (!carousel) return;
+
+      let direction = 1;
+      const speed = 1;
+      let interval = null;
+
+      const startScroll = () => {
+        if (interval) return;
+        interval = setInterval(() => {
+          carousel.scrollLeft += direction * speed;
+          if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) {
+            direction = -1;
+          } else if (carousel.scrollLeft <= 0) {
+            direction = 1;
+          }
+        }, 16);
+      };
+
+      const stopScroll = () => {
+        clearInterval(interval);
+        interval = null;
+      };
+
+      carousel.addEventListener('mouseenter', stopScroll);
+      carousel.addEventListener('mouseleave', startScroll);
+      startScroll();
+    });
+  </script>
 {% endblock %}

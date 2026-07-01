@@ -207,7 +207,7 @@ img {
   display: grid;
   gap: 2rem;
   grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
-  align-items: start;
+  align-items: stretch;
 }
 
 .card-grid {
@@ -215,10 +215,11 @@ img {
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 2rem;
+  align-items: stretch;
 }
 
 .highlight-card {
-  min-height: 180px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
