@@ -64,13 +64,17 @@ async function loadProfile() {
   `;
 
   const coursesHtml = courses.length
-    ? courses.map(course => `
+    ? courses.map(course => {
+      const startedAt = course.enrolled_at ? new Date(course.enrolled_at).toLocaleString() : 'Not started yet';
+      return `
       <div class="admin-card">
         <h3>${course.title}</h3>
         <p>${course.summary || course.description}</p>
+        <p><strong>Started:</strong> ${startedAt}</p>
         <p><strong>Progress:</strong> ${course.percentage}%</p>
       </div>
-    `).join('')
+    `;
+    }).join('')
     : '<p>You have not enrolled in any courses yet.</p>';
 
   profileContainer.innerHTML = `

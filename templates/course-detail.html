@@ -107,6 +107,10 @@
     <div class="course-hero">
       <h1 id="course-title">Loading course...</h1>
       <p id="course-description"></p>
+      <div class="course-action">
+        <button id="start-course-button" class="button primary" style="margin-top: 1.5rem; display: none;">Start Course</button>
+        <p id="course-message" class="form-message" style="margin-top: 1rem;"></p>
+      </div>
     </div>
 
     <div class="lessons-container" id="lessons-container">
@@ -117,13 +121,27 @@
 
 {% block extra_scripts %}
   <script>
+    let currentCourseId = null;
+
     async function loadCourseDetail() {
       const params = new URLSearchParams(window.location.search);
       const courseId = params.get('course_id');
+      currentCourseId = courseId;
 
       if (!courseId) {
         document.getElementById('lessons-container').innerHTML = '<p>No course selected.</p>';
         return;
+      }
+
+      let courseStarted = false;
+      try {
+        const profileResponse = await fetch('/api/profile', { credentials: 'include' });
+        if (profileResponse.ok) {
+          const profileData = await profileResponse.json();
+          courseStarted = (profileData.courses || []).some(c => c.id == courseId);
+        }
+      } catch (error) {
+        console.warn('Unable to fetch profile enrollment status:', error);
       }
 
       try {
@@ -139,6 +157,13 @@
 
         document.getElementById('course-title').textContent = course.title;
         document.getElementById('course-description').textContent = course.summary;
+
+        const startButton = document.getElementById('start-course-button');
+        if (startButton) {
+          startButton.textContent = courseStarted ? 'Continue Course' : 'Start Course';
+          startButton.style.display = 'inline-flex';
+          startButton.onclick = () => startCourse(courseId);
+        }
 
         // Get lessons for this course
         const lessonsResponse = await fetch(`/api/courses/${courseId}/lessons`, { credentials: 'include' });
@@ -200,6 +225,41 @@
         }
       } catch (error) {
         document.getElementById('lessons-container').innerHTML = `<p>Error loading course: ${error.message}</p>`;
+      }
+    }
+
+    function startLab(exerciseId) {
+      window.location.href = `/lab.html?exercise_id=${exerciseId}`;
+    }
+
+    async function startCourse(courseId) {
+      const message = document.getElementById('course-message');
+      if (!courseId) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/courses/${courseId}/start`, {
+          method: 'POST',
+          credentials: 'include',
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          message.textContent = result.error || 'Could not start the course.';
+          message.style.color = '#dc2626';
+          return;
+        }
+
+        message.textContent = result.message || 'Course started successfully.';
+        message.style.color = '#15803d';
+        const startButton = document.getElementById('start-course-button');
+        if (startButton) {
+          startButton.textContent = 'Continue Course';
+        }
+      } catch (error) {
+        message.textContent = `Error starting course: ${error.message}`;
+        message.style.color = '#dc2626';
       }
     }
 
