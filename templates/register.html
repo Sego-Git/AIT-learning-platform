@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block head %}
+  <title>Africa Technology Innovation | Register</title>
+{% endblock %}
+
+{% block content %}
+  <main class="container page-content">
+    <section class="section">
+      <h1>Register</h1>
+      <p>Create your account and join the AIT community today.</p>
+    </section>
+
+    <section class="contact-card">
+      <form id="register-form" class="contact-form">
+        <div id="register-message" class="form-message"></div>
+        <label>
+          Full Name
+          <input type="text" id="register-name" name="full_name" placeholder="Your name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" id="register-email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Password
+          <input type="password" id="register-password" name="password" placeholder="Choose a password" required>
+        </label>
+        <button class="button primary" type="submit">Register</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}

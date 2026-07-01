@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block head %}
+  <title>Africa Innovation Technology  | Lab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor.min.css">
+  <style>
+    .lab-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      height: calc(100vh - 140px);
+      padding: 1rem 0;
+    }
+    .lab-panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      background: var(--surface-soft);
+    }
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    #editor {
+      height: 100%;
+    }
+    .editor-actions {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+    .button-sm {
+      padding: 0.65rem 1rem;
+      font-size: 0.9rem;
+    }
+    .output-container {
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-y: auto;
+      max-height: 200px;
+    }
+    .output-line {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+    }
+    .output-error {
+      color: #f87171;
+    }
+    .output-success {
+      color: #86efac;
+    }
+    .lesson-content h2 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+    .lesson-content p {
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .code-example {
+      background: #f1f5f9;
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    @media (max-width: 1200px) {
+      .lab-container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container page-content">
+    <div class="section">
+      <h1 id="exercise-title">Python Lab</h1>
+      <p id="exercise-description">Loading exercise...</p>
+    </div>
+
+    <div class="lab-container">
+      <!-- Left Panel: Lesson Content -->
+      <div class="lab-panel">
+        <div class="panel-header">Lesson Content</div>
+        <div class="panel-content lesson-content" id="lesson-content">
+          <p>Loading lesson...</p>
+        </div>
+      </div>
+
+      <!-- Right Panel: Code Editor -->
+      <div class="lab-panel">
+        <div class="panel-header">Code Editor</div>
+        <div id="editor"></div>
+        <div class="editor-actions">
+          <button class="button primary button-sm" id="run-btn">▶ Run Code</button>
+          <button class="button secondary button-sm" id="submit-btn">✓ Submit</button>
+          <button class="button secondary button-sm" id="reset-btn">↻ Reset</button>
+        </div>
+        <div class="panel-header">Output</div>
+        <div class="output-container" id="output"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+  <script src="{{ url_for('static', filename='js/lab.js') }}" defer></script>
+{% endblock %}

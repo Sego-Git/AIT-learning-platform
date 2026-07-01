@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block head %}
+  <title>Africa Technology Innovation | Login</title>
+{% endblock %}
+
+{% block content %}
+  <main class="container page-content">
+    <section class="section">
+      <h1>Login</h1>
+      <p>Access your AIT account and continue your learning journey.</p>
+    </section>
+
+    <section class="contact-card">
+      <form id="login-form" class="contact-form">
+        <div id="login-message" class="form-message"></div>
+        <label>
+          Email
+          <input type="email" id="login-email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Password
+          <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+        </label>
+        <button class="button primary" type="submit">Login</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}

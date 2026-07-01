@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block head %}
+  <title>Africa Technology Innovation | Courses</title>
+{% endblock %}
+
+{% block content %}
+  <main class="container page-content">
+    <section class="section">
+      <h1>Courses</h1>
+      <p>Our curriculum is built to help learners gain skills, launch products, and scale innovation in Africa.</p>
+    </section>
+
+    <section class="course-grid" id="courses-grid">
+      <p>Loading courses...</p>
+    </section>
+  </main>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    async function loadCourses() {
+      const grid = document.getElementById('courses-grid');
+      try {
+        const response = await fetch('/api/courses', { credentials: 'include' });
+        const data = await response.json();
+        const courses = data.courses || [];
+        
+        if (courses.length === 0) {
+          grid.innerHTML = '<p>No courses available yet.</p>';
+          return;
+        }
+        
+        grid.innerHTML = courses.map(course => `
+          <article class="course-card">
+            <h2>${course.title}</h2>
+            <p>${course.summary}</p>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 1rem;">Price: ${course.price}</p>
+            <button class="button primary" style="margin-top: 1rem; width: 100%;" onclick="goToCourse(${course.id})">View Course</button>
+          </article>
+        `).join('');
+      } catch (error) {
+        grid.innerHTML = `<p>Error loading courses: ${error.message}</p>`;
+      }
+    }
+    
+    function goToCourse(courseId) {
+      window.location.href = `/course-detail.html?course_id=${courseId}`;
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadCourses);
+  </script>
+{% endblock %}
+

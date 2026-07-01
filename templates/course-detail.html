@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% block head %}
+  <title>Africa Technology Innovation | Course Details</title>
+  <style>
+    .course-hero {
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.16), rgba(245, 158, 11, 0.12));
+      padding: 2rem;
+      border-radius: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .course-hero h1 {
+      margin: 0 0 0.5rem 0;
+      color: #0f172a;
+    }
+    .course-hero p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .lessons-container {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .lesson-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05);
+    }
+    .lesson-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .lesson-header h2 {
+      margin: 0;
+      color: #0f172a;
+      flex: 1;
+    }
+    .lesson-badge {
+      background: rgba(22, 163, 74, 0.12);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .exercises-list {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .exercise-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+    }
+    .exercise-info h3 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+    .exercise-info p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .difficulty-beginner {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .difficulty-intermediate {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .difficulty-advanced {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .exercise-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .button-sm {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container page-content">
+    <div class="course-hero">
+      <h1 id="course-title">Loading course...</h1>
+      <p id="course-description"></p>
+    </div>
+
+    <div class="lessons-container" id="lessons-container">
+      <p>Loading lessons...</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    async function loadCourseDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const courseId = params.get('course_id');
+
+      if (!courseId) {
+        document.getElementById('lessons-container').innerHTML = '<p>No course selected.</p>';
+        return;
+      }
+
+      try {
+        // Get course info
+        const courseResponse = await fetch('/api/courses', { credentials: 'include' });
+        const courseData = await courseResponse.json();
+        const course = courseData.courses.find(c => c.id == courseId);
+
+        if (!course) {
+          document.getElementById('lessons-container').innerHTML = '<p>Course not found.</p>';
+          return;
+        }
+
+        document.getElementById('course-title').textContent = course.title;
+        document.getElementById('course-description').textContent = course.summary;
+
+        // Get lessons for this course
+        const lessonsResponse = await fetch(`/api/courses/${courseId}/lessons`, { credentials: 'include' });
+        const lessonsData = await lessonsResponse.json();
+        const lessons = lessonsData.lessons || [];
+
+        if (lessons.length === 0) {
+          document.getElementById('lessons-container').innerHTML = '<p>No lessons available for this course yet.</p>';
+          return;
+        }
+
+        let html = '';
+        for (const lesson of lessons) {
+          html += `
+            <div class="lesson-card">
+              <div class="lesson-header">
+                <h2>${lesson.title}</h2>
+                <span class="lesson-badge">Lesson ${lesson.order_index + 1}</span>
+              </div>
+              <p>${lesson.description}</p>
+              <div class="exercises-list" id="exercises-${lesson.id}">
+                <p style="color: var(--muted);">Loading exercises...</p>
+              </div>
+            </div>
+          `;
+        }
+
+        document.getElementById('lessons-container').innerHTML = html;
+
+        // Load exercises for each lesson
+        for (const lesson of lessons) {
+          try {
+            const exercisesResponse = await fetch(`/api/lessons/${lesson.id}/exercises`, { credentials: 'include' });
+            const exercisesData = await exercisesResponse.json();
+            const exercises = exercisesData.exercises || [];
+
+            let exercisesHtml = '';
+            if (exercises.length === 0) {
+              exercisesHtml = '<p style="color: var(--muted);">No exercises available.</p>';
+            } else {
+              exercisesHtml = exercises.map(ex => `
+                <div class="exercise-item">
+                  <div class="exercise-info">
+                    <h3>${ex.title}</h3>
+                    <p>${ex.description}</p>
+                  </div>
+                  <div class="exercise-actions">
+                    <span class="difficulty-badge difficulty-${ex.difficulty}">${ex.difficulty}</span>
+                    <button class="button primary button-sm" onclick="startLab(${ex.id})">Start Lab</button>
+                  </div>
+                </div>
+              `).join('');
+            }
+
+            document.getElementById(`exercises-${lesson.id}`).innerHTML = exercisesHtml;
+          } catch (error) {
+            document.getElementById(`exercises-${lesson.id}`).innerHTML = `<p style="color: red;">Error loading exercises: ${error.message}</p>`;
+          }
+        }
+      } catch (error) {
+        document.getElementById('lessons-container').innerHTML = `<p>Error loading course: ${error.message}</p>`;
+      }
+    }
+
+    function startLab(exerciseId) {
+      window.location.href = `/lab.html?exercise_id=${exerciseId}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCourseDetail);
+  </script>
+{% endblock %}
