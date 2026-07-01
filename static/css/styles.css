@@ -124,6 +124,138 @@ img {
   z-index: 1;
 }
 
+.hero-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.hero-copy {
+  max-width: 680px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-panel-card,
+.spotlight-card,
+.team-card,
+.highlight-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+}
+
+.hero-panel-card h2,
+.spotlight-card h3,
+.team-card h3,
+.highlight-card h3 {
+  margin-top: 0;
+}
+
+.hero-panel-card p,
+.spotlight-card p,
+.team-card p,
+.highlight-card p {
+  color: var(--muted);
+}
+
+.hero-metrics {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 2rem;
+}
+
+.hero-metrics div {
+  background: rgba(245, 158, 11, 0.08);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.hero-metrics strong {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #0f172a;
+}
+
+.spotlight {
+  padding: 4rem 0;
+}
+
+.spotlight-inner {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 2rem;
+}
+
+.highlight-card {
+  min-height: 180px;
+}
+
+.spotlight-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotlight-card {
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+
+.spotlight-card span {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.team {
+  padding: 4rem 0 6rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.team-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.team-card {
+  min-height: 220px;
+}
+
 .home-hero h1,
 .page-content h1 {
   font-size: clamp(2.8rem, 4vw, 4.6rem);

@@ -4,35 +4,32 @@
 {% endblock %}
 
 {% block content %}
-  <section class="carousel-section container">
-    <h2>Our Startup Vision</h2>
-    <div class="carousel">
-      <article class="carousel-card">
-        <h3>Community-led innovation</h3>
-        <p>We connect African builders with tools, resources, and mentors so they can turn ideas into real products.</p>
-      </article>
-      <article class="carousel-card">
-        <h3>Practical learning</h3>
-        <p>We focus on skills that matter: product design, startup growth, AI, and software delivery at scale.</p>
-      </article>
-      <article class="carousel-card">
-        <h3>Local impact</h3>
-        <p>We support founders across the continent to build sustainable tech businesses for African markets.</p>
-      </article>
-      <article class="carousel-card">
-        <h3>Network empowerment</h3>
-        <p>We provide access to peer networks, mentors, and funding readiness support to accelerate your startup.</p>
-      </article>
-    </div>
-  </section>
-
   <section class="hero home-hero">
-    <div class="container hero-content">
-      <h1>Build Africa's Next Great Innovation Platform</h1>
-      <p>Discover training, community support, and tools for entrepreneurs, developers, and innovators across Africa.</p>
-      <div class="button-group">
-        <a class="button primary" href="{{ url_for('render_page', page='courses.html') }}">Explore Courses</a>
-        <a class="button secondary" href="{{ url_for('render_page', page='community.html') }}">Join Community</a>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Launch your next tech journey</span>
+        <h1>Build Africa’s future with practical courses, real community support, and startup-ready skills.</h1>
+        <p>Join a platform designed for founders, developers, and innovators across Africa. Learn AI, product design, and growth skills with hands-on projects, mentorship, and a supportive community.</p>
+
+        <div class="button-group">
+          <a class="button primary" href="{{ url_for('render_page', page='courses.html') }}">Explore Courses</a>
+          <a class="button secondary" href="{{ url_for('render_page', page='community.html') }}">Join Community</a>
+        </div>
+
+        <div class="hero-metrics">
+          <div><strong>50+</strong> courses</div>
+          <div><strong>1,200+</strong> learners</div>
+          <div><strong>24/7</strong> community support</div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-panel-card">
+          <p class="eyebrow">Featured course</p>
+          <h2>Python Programming Basics</h2>
+          <p>Practical Python lessons for beginners, with real exercises and a live coding lab.</p>
+          <a class="button primary" href="/course-detail.html?course_id=2">Start Python Course</a>
+        </div>
       </div>
     </div>
   </section>
@@ -49,6 +46,37 @@
     <div class="feature-card">
       <h2>Grow</h2>
       <p>Tools, pricing plans, and resources to help your startup level up.</p>
+    </div>
+  </section>
+
+  <section class="spotlight container">
+    <div class="spotlight-inner">
+      <div>
+        <span class="eyebrow">Skills that move you forward</span>
+        <h2>Hands-on learning for real-world tech work</h2>
+        <p>From Python foundations to product launch readiness, every lesson is built to give you practical skills that matter in African startup and innovation ecosystems.</p>
+        <div class="card-grid">
+          <article class="highlight-card">
+            <h3>Live labs</h3>
+            <p>Practice code in the browser and get instant feedback on exercises.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Mentor-backed</h3>
+            <p>Get guidance from operators, founders, and experts across the continent.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Affordable plans</h3>
+            <p>Access premium learning without high fees so teams and individuals can join.</p>
+          </article>
+        </div>
+      </div>
+      <div class="spotlight-visual">
+        <div class="spotlight-card">
+          <h3>What AIT learners say</h3>
+          <p>“AIT helped me launch my MVP in weeks, with community support that kept me moving.”</p>
+          <span>— Ama, startup founder</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -69,49 +97,25 @@
     </div>
   </section>
 
-  <section class="section container" style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.12), rgba(245, 158, 11, 0.1)); border-radius: 1.5rem; padding: 2rem;">
-    <div class="split-grid">
-      <div>
-        <h2 style="color: var(--primary);">🐍 Python Programming</h2>
-        <p>Start learning Python from scratch with interactive lessons and hands-on coding exercises. Perfect for beginners who want to build real programming skills.</p>
-        <a class="button primary" href="/course-detail.html?course_id=2" style="margin-top: 1rem;">Start Python Course</a>
-      </div>
-      <div style="display: flex; align-items: center; justify-content: center;">
-        <div style="font-size: 5rem;">🚀</div>
-      </div>
+  <section class="team container">
+    <div class="section-header">
+      <span class="eyebrow">Meet the team</span>
+      <h2>Founders & project leaders</h2>
     </div>
-  </section>
-      <div>
-        <ul class="checklist">
-          <li>Expert-led courses</li>
-          <li>Peer discussion forums</li>
-          <li>Flexible pricing</li>
-          <li>Real-world project support</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="carousel-section container">
-    <h2>Founders & Project Team</h2>
-    <div class="carousel">
-      <article class="carousel-card">
-        <div class="carousel-image"></div>
+    <div class="team-grid">
+      <article class="team-card">
         <h3>Founder 1</h3>
         <p>Lead strategist focused on product vision, partnerships, and community growth.</p>
       </article>
-      <article class="carousel-card">
-        <div class="carousel-image"></div>
+      <article class="team-card">
         <h3>Founder 2</h3>
         <p>Responsible for curriculum design, mentor programs, and learner success.</p>
       </article>
-      <article class="carousel-card">
-        <div class="carousel-image"></div>
+      <article class="team-card">
         <h3>Founder 3</h3>
         <p>Oversees platform experience, content delivery, and innovation operations.</p>
       </article>
-      <article class="carousel-card">
-        <div class="carousel-image"></div>
+      <article class="team-card">
         <h3>Founder 4</h3>
         <p>Drives growth strategy and partnerships across the African innovation ecosystem.</p>
       </article>
